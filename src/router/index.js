@@ -13,7 +13,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') {
       next('/')
     } else {
-      const user = store.state.user.user
+      const { user } = store.state.user
       if (Reflect.ownKeys(user).length <= 0) {
         try {
           const user = await User.getPermissions()
