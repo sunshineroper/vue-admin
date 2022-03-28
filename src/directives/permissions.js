@@ -15,17 +15,17 @@ export default {
     let type
     let permission
     if (Object.prototype.toString.call(binding.value) === '[object Object]') {
-      ;({ permission } = binding.value)
-      ;({ type } = binding.value)
+      ; ({ permission } = binding.value)
+        ; ({ type } = binding.value)
     } else {
       permission = binding.value
     }
-    const { user, permisisons } = store.state.user
-    const _permisisons = []
-    Reflect.ownKeys(permisisons).forEach((item) => {
-      permisisons[item].forEach((p) => _permisisons.push(p.permission))
+    const { user, permissions } = store.state.user
+    const _permissions = []
+    Reflect.ownKeys(permissions).forEach((item) => {
+      permissions[item].forEach((p) => _permissions.push(p.permission))
     })
-    const isAllow = isAllowd(permission, user, _permisisons)
+    const isAllow = isAllowd(permission, user, _permissions)
     if (!isAllow && permission) {
       if (type) {
         el.disabled = true

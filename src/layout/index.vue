@@ -9,7 +9,7 @@
     </el-aside>
     <el-container>
       <el-header
-        class="header flex justify-between flex-col shadow-lg p-0 bottom-px border-solid border-gray-200"
+        class="flex justify-between flex-col shadow-lg p-0 bottom-px border-solid border-gray-200"
         style="padding: 0"
         :style="headerStyle"
       >
@@ -33,6 +33,7 @@
     </el-container>
   </el-container>
 </template>
+
 <script setup>
 import SideBar from './components/SideBar'
 import AppMain from './components/AppMain.vue'

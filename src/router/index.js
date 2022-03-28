@@ -18,8 +18,6 @@ router.beforeEach(async (to, from, next) => {
         try {
           const user = await User.getPermissions()
           store.dispatch('user/setUserAndUpdate', user)
-          store.commit('user/SET_USER_MENUS', user.menus)
-          store.commit('user/SET_USER_PERMISSIONS', user.permissions)
           loadRouter(user, router)
           return next(to.path)
         } catch (error) {

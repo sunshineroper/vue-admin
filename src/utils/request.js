@@ -26,8 +26,34 @@ service.interceptors.request.use((originConfig) => {
     const accessToken = getItem('access_token')
     reqConfig.headers.Authorization = accessToken
   }
-
-  return originConfig
+  if (reqConfig.method === 'post') {
+    if (!reqConfig.data) {
+      reqConfig.data = reqConfig.params || {}
+    }
+    let hasFile = false
+    if (reqConfig.data) {
+      Object.keys(reqConfig.data).forEach((key) => {
+        const item = reqConfig.data[key]
+        if (typeof item === 'object') {
+          if (
+            item instanceof FileList ||
+            item instanceof File ||
+            item instanceof Blob
+          ) {
+            hasFile = true
+          }
+        }
+      })
+      if (hasFile) {
+        const formData = new FormData()
+        Object.keys(reqConfig.data).forEach((key) => {
+          formData.append(key, reqConfig.data[key])
+        })
+        reqConfig.data = formData
+      }
+    }
+  }
+  return reqConfig
 })
 service.interceptors.response.use(
   async (res) => {

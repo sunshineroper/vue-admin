@@ -19,7 +19,7 @@ export default {
     isCollapse: false, // 左侧是否折叠
     loginIn: false,
     user: {},
-    permisisons: [], // 每个用户的权限
+    permissions: [], // 每个用户的权限
     userMenus: [],
     userTreeMenus: []
   }),
@@ -28,7 +28,7 @@ export default {
       state.loginIn = payload
     },
     [types.SET_USER_PERMISSIONS](state, payload) {
-      state.permisisons = payload
+      state.permissions = payload
     },
     [types.SET_USER_MENUS](state, payload) {
       state.userMenus = payload
@@ -47,6 +47,8 @@ export default {
     setUserAndUpdate: ({ commit }, user) => {
       commit(types.SET_LOGININ, true)
       commit(types.SET_USER, user)
+      commit(types.SET_USER_MENUS, user.menus)
+      commit(types.SET_USER_PERMISSIONS, user.permissions)
     },
     loginOut: ({ commit }) => {
       localStorage.clear()

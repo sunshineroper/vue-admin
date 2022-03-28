@@ -22,6 +22,9 @@ export default class User {
     })
     return users
   }
+  static async updateUser(id, data) {
+    return put(`cms/user/${id}`, data)
+  }
   static async deleteUser(id) {
     return _delete(`cms/user/${id}`)
   }

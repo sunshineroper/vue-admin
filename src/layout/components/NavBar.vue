@@ -1,24 +1,24 @@
 <template>
-  <div class="navbar-contaier">
+  <div class="flex items-center justify-between w-full">
     <breadcrumb></breadcrumb>
-    <div class="right-info">
-      <div class="right-menu">
-        <langSelect class="right-menu-item"></langSelect>
-        <themeSelect class="right-menu-item"></themeSelect>
-        <el-cion class="right-menu-item">
+    <div class="flex items-center">
+      <div class="flex items-center">
+        <langSelect class="inline-block text-xl pr-4"></langSelect>
+        <themeSelect class="inline-block text-xl  pr-4"></themeSelect>
+        <el-cion class="inline-block text-xl  pr-4">
           <svg-icon icon="fullscreen"></svg-icon>
         </el-cion>
       </div>
 
       <el-dropdown trigger="click">
-        <span class="el-dropdown-link">
+        <span class="flex center gap">
           <el-avatar
             class="mx-1"
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
           ></el-avatar>
           <template v-if="user">
             <div class="flex items-center cursor-pointer">
-              <span class="text-base">{{ user.username }}</span>
+              <span class="text-base mx-2">{{ user.username }}</span>
               <svg-icon icon="setting-fill" class="text-base mx-1"></svg-icon>
             </div>
           </template>
@@ -72,37 +72,4 @@ const loginOut = () => {
 }
 </script>
 <style scoped lang="scss">
-.item {
-  display: flex;
-  align-items: center;
-  .login-out-icon {
-    color: #f12929;
-  }
-}
-.el-dropdown-link {
-  display: flex;
-  align-items: center;
-  .name {
-    margin: 0 8px;
-  }
-}
-.navbar-contaier {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  .right-info {
-    display: flex;
-    align-items: center;
-    .right-menu {
-      display: flex;
-      align-items: center;
-      ::v-deep .right-menu-item {
-        display: inline-block;
-        padding: 0 18px 0 0;
-        font-size: 20px;
-      }
-    }
-  }
-}
 </style>
