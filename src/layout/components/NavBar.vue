@@ -14,7 +14,7 @@
         <span class="flex center gap">
           <el-avatar
             class="mx-1"
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            :src="currentUserAvatar"
           ></el-avatar>
           <template v-if="user">
             <div class="flex items-center cursor-pointer">
@@ -26,7 +26,7 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>
-              <div class="flex items-center">
+              <div class="flex items-center" @click="toUserSettingInfo">
                 <el-icon><tools /></el-icon>
                 个人设置
               </div>
@@ -55,8 +55,12 @@ import { Tools } from '@element-plus/icons'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessageBox } from 'element-plus'
+import config from '@/config'
+import { useRouter } from 'vue-router'
 const store = useStore()
+const router = useRouter()
 const user = computed(() => store.getters['user/getUser'])
+const currentUserAvatar = computed(() => `${config.basePicURL}${user.value.avatar}`)
 // 退出登录
 const loginOut = () => {
   ElMessageBox.confirm('是否确定退出登录?', 'Warning', {
@@ -69,6 +73,9 @@ const loginOut = () => {
       location.reload()
     })
     .catch(() => {})
+}
+const toUserSettingInfo = () => {
+  router.push('/user/userinfo-setting')
 }
 </script>
 <style scoped lang="scss">

@@ -44,8 +44,8 @@
           <template v-slot="{ row }">
             <el-image
               class="avatar"
-              :src="row.avatar"
-              :preview-src-list="[row.avatar]"
+              :src="`${config.basePicURL}/${row.avatar}`"
+              :preview-src-list="[`${config.basePicURL}/${row.avatar}`]"
             ></el-image>
           </template>
         </el-table-column>
@@ -138,7 +138,7 @@ import Group from '@/api/group'
 import User from '@/api/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Refresh } from '@element-plus/icons'
-
+import config from '@/config'
 // 获取用户列表相关
 const tableData = ref([])
 const pageCount = ref(10)

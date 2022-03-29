@@ -15,16 +15,16 @@
       >
         <div class="w-full h-full">
           <div class="flex items-center pl-5 h-10">
-            <el-cion class="mr-2 cursor-pointer" @click="changeSlidebarState">
+            <el-cion class="mr-2 mt-4 cursor-pointer" @click="changeSlidebarState">
               <svg-icon
                 :icon="sidebarStateIcon"
                 width="20px"
                 height="20px"
               ></svg-icon>
             </el-cion>
-            <nav-bar></nav-bar>
+            <nav-bar class="mt-4"></nav-bar>
           </div>
-          <tags-view></tags-view>
+          <tags-view class="mt-2"></tags-view>
         </div>
       </el-header>
       <el-main class="main">
@@ -61,10 +61,10 @@ const changeSlidebarState = () => {
 }
 onMounted(() => {
   if (historiesList.value.length >= 2) {
-    headerStyle.value.height = '80px'
+    headerStyle.value.height = '88px'
   }
   emitter.on('hasTags', () => {
-    headerStyle.value.height = '80px'
+    headerStyle.value.height = '88px'
   })
   emitter.on('noTags', () => {
     headerStyle.value.height = '52px'

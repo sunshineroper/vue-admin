@@ -1,70 +1,76 @@
 <template>
   <el-card>
-    <el-tabs tab-position="left">
+    <el-tabs tab-position="left" >
       <el-tab-pane label="基本设置">
-        <div class="w-20 h-20  rounded-full relative flex justify-center items-center mask ">
-          <img :src="currentUserAvatar"  alt="" class="w-20 h-20 rounded-full absolute top-0 bottom-0">
-          <svg-icon  @click="onClick" icon="plus" color="#fff" class="plus text-center bg-white-800 text-2xl absolute opacity-0"></svg-icon>
-          <input type="file" class="hidden" @change="onChangeFile" ref="fileInput"/>
+        <div class="relative">
+           <el-form
+            class="w-3/5"
+            :model="currentUser"
+            ref="form"
+            :label-width="120"
+          >
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="currentUser.username" disabled readonly></el-input>
+          </el-form-item>
+          <el-form-item label="用户昵称" prop="nickname">
+            <el-input v-model="currentUser.nickname" disabled readonly></el-input>
+          </el-form-item>
+          <el-form-item label="email" prop="email">
+            <el-input v-model="currentUser.email" disabled readonly></el-input>
+          </el-form-item>
+        </el-form>
+        <div class="absolute right-4 top-1/2 -translate-y-1/2">
+          <div class="w-24 h-24  overflow-hidden  relative rounded-full flex justify-center items-center mask">
+            <img :src="currentUserAvatar"  alt="" class="min-w-full min-h-full absolute top-0 bottom-0">
+            <div class="w-full h-full absolute opacity-0 plus flex justify-center items-center"  @click="onClick">
+              <svg-icon  icon="plus" color="#fff" class=" text-center text-2xl "></svg-icon>
+            </div>
+          </div>
+        </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="安全设置">账号设置</el-tab-pane>
+      <el-tab-pane label="安全设置">安全设置</el-tab-pane>
       <el-tab-pane label="第三方账号绑定">第三方账号绑定</el-tab-pane>
   </el-tabs>
+  <input-file :onSuccess="onSuccess" ref="inputFileRef" />
   <avatar-cropper v-model="avatarCropperVisible" :cropperURL="cropperURL"></avatar-cropper>
 
   </el-card>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import avatarCropper from './components/avatar'
+import InputFile from './components/inputFile'
+import config from '@/config'
 const store = useStore()
 const currentUser = computed(() => store.getters['user/getUser'])
-const currentUserAvatar = computed(() => `http://localhost:4000/upload/${currentUser.value.avatar}`)
-const fileInput = ref(null)
+const currentUserAvatar = computed(() => `${config.basePicURL}${currentUser.value.avatar}`)
+const inputFileRef = ref(null)
 const avatarCropperVisible = ref(false)
-let image
 const cropperURL = ref('')
-
 const onClick = () => {
-  fileInput.value.click()
-}
-const clearFileInputVal = () => {
-  fileInput.value && (fileInput.value.value = '')
-  image = null
+  inputFileRef.value.click()
 }
 
-const onChangeFile = (e) => {
-  const file = e.target.files[0]
-  const localUrl = window.URL.createObjectURL(file)
-  image = new Image()
-  image.src = localUrl
-  image.onload = () => {
-    if (image.height < 80) {
-      ElMessage.error('图片宽度不能少于80')
-      clearFileInputVal()
-      return
-    }
-    if (image.width < 80) {
-      ElMessage.error('图片宽度不能少于80')
-      clearFileInputVal()
-    }
+const onSuccess = (localUrl) => {
     avatarCropperVisible.value = true
     cropperURL.value = localUrl
-  }
-  image.onerror = () => {
-    ElMessage.error('图片加载失败')
-  }
 }
+
+watch(() => avatarCropperVisible.value, (val) => {
+  if (!val) {
+    cropperURL.value = ''
+  }
+})
 </script>
 
 <style lang='scss' scoped>
 .mask:hover {
-  //  background: rgba(0,0,0, .1);
+
   .plus {
+    background: rgba(0,0,0, .2);
     cursor: pointer;
     z-index: 0;
     opacity: 1;
