@@ -54,7 +54,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { defineProps, computed, defineEmits, ref, watch } from 'vue'
-import Admin from '@/api/admin'
+import Menu from '@/api/menu'
 import rules from './rule'
 const formModel = ref({ title: '', keep_alive: 1, hidden: 0, is_nav: 1 })
 const form = ref(null)
@@ -88,7 +88,7 @@ const createMenu = async () => {
   try {
     formModel.value.parent_id = props.id
     loading.value = true
-    const { code, message } = await Admin.createMenu(formModel.value)
+    const { code, message } = await Menu.createMenu(formModel.value)
     loading.value = false
     if (code < 100) {
       ElMessage.success(message)
@@ -104,7 +104,7 @@ const createMenu = async () => {
 const updateMenu = async () => {
   try {
     loading.value = true
-    const { code, message } = await Admin.updateMenu(formModel.value)
+    const { code, message } = await Menu.updateMenu(formModel.value)
     if (code < 100) {
       ElMessage.success(message)
       resetForm()
@@ -138,7 +138,7 @@ watch(
     resetForm()
     if (props.type === 'edit' && val && props.id) {
       dialogloading.value = true
-      formModel.value = await Admin.findMenuById(props.id)
+      formModel.value = await Menu.findMenuById(props.id)
       formModel.value.menutype = formModel.value.menutype + ''
       dialogloading.value = false
     }

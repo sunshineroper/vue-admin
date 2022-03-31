@@ -54,15 +54,6 @@ const adminRouters = [
     is_nav: 1,
     name: 'log-manager',
     icon: 'yonghurizhi'
-  },
-  {
-    menutype: 3,
-    component: 'views/userinfo-setting/index',
-    title: '个人中心',
-    path: '/user/userinfo-setting',
-    is_nav: 0,
-    name: 'log-manager',
-    icon: 'setting'
   }
 ]
 export default adminRouters

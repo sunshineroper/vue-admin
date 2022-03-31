@@ -11,7 +11,7 @@ const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000,
   validateStatus(status) {
-    return status >= 200 && status < 500
+    return status >= 200 && status <= 500
   }
 })
 

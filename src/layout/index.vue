@@ -48,7 +48,7 @@ const historiesList = computed(() =>
   store.getters['app/getHistories'](stageList.value)
 )
 const headerStyle = ref({
-  height: '52px'
+  height: '62px'
 })
 const defaultSideWitdh = computed(() => store.getters.cssVar.sideBarWidth)
 const isCollapse = computed(() => store.getters['user/getCollapse'])
@@ -67,7 +67,7 @@ onMounted(() => {
     headerStyle.value.height = '88px'
   })
   emitter.on('noTags', () => {
-    headerStyle.value.height = '52px'
+    headerStyle.value.height = '62px'
   })
 })
 const sidebarStateIcon = computed(() => {

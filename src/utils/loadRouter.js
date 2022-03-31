@@ -1,26 +1,22 @@
 import Utils from '@/utils/utils'
 import adminRouters from '@/config/stage/admin'
+import commonRouters from '@/config/stage/common'
 import store from '@/store'
 // 动态路由添加
 const loadRouter = (user, router) => {
   const { menus } = user
+  // 处理用户路由并且生成tree
   deepReduceName(menus)
   let treeMenu = []
-
   listTree(menus, treeMenu, 0)
-  const menuRouter = []
   if (user.admin) {
+    deepReduceName(adminRouters)
     treeMenu = treeMenu.concat(adminRouters)
   }
-  treeMenu.push({
-    path: '/profile',
-    type: 'view',
-    component: 'views/profile',
-    title: '关于我们',
-    isNav: true,
-    icon: '',
-    name: 'profile'
-  })
+  // 处理通用的路由加载
+  deepReduceName(commonRouters)
+  treeMenu = treeMenu.concat(commonRouters)
+  const menuRouter = []
   deepTrevel(treeMenu, (menu) => {
     const viewRouter = {}
     viewRouter.path = menu.path

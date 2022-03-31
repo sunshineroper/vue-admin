@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <div class="flex">
       <el-button
         type="info"
         class="mr-8"
@@ -10,9 +9,6 @@
         >新增</el-button
       >
       <el-button type="danger" @click="handleDeleteClick">删除</el-button>
-    </div>
-    <div class="h-0.5 text-red-600 mb-20" style="font-size: 24px">22</div>
-    <div class="text-base">3333</div> -->
     <el-upload action="http://localhost:4000/cms/file">
       <el-button>文件上传</el-button>
     </el-upload>
@@ -28,13 +24,13 @@
 </template>
 <script setup>
 import { post } from '@/utils/request.js'
-// import Article from '@/api/article'
+import Article from '@/api/article'
 // const handleChange = async () => {
 //   await Article.addArticle()
 // }
-// const handleDeleteClick = async () => {
-//   await Article.deleteArticle(2)
-// }
+const handleDeleteClick = async () => {
+  await Article.deleteArticle(2)
+}
 const handleChange = async (e) => {
   const { files } = e.target
   if (!files) return

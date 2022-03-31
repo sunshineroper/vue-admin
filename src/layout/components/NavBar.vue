@@ -3,11 +3,15 @@
     <breadcrumb></breadcrumb>
     <div class="flex items-center">
       <div class="flex items-center">
-        <langSelect class="inline-block text-xl pr-4"></langSelect>
-        <themeSelect class="inline-block text-xl  pr-4"></themeSelect>
+        <el-tooltip content="项目开源地址" class="mr-2">
+          <svg-icon icon="github-fill" width="30px" height="30px"></svg-icon>
+        </el-tooltip>
+        <!-- <langSelect class="inline-block text-xl pr-4"></langSelect>
+        <themeSelect class="inline-block text-xl  pr-4"></themeSelect> -->
         <el-cion class="inline-block text-xl  pr-4">
           <svg-icon icon="fullscreen"></svg-icon>
         </el-cion>
+
       </div>
 
       <el-dropdown trigger="click">
@@ -49,8 +53,8 @@
 </template>
 <script setup>
 import breadcrumb from './breadcrumb.vue'
-import langSelect from '@/components/LangSelect'
-import themeSelect from '@/components/ThemeSelect'
+// import langSelect from '@/components/LangSelect'
+// import themeSelect from '@/components/ThemeSelect'
 import { Tools } from '@element-plus/icons'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
