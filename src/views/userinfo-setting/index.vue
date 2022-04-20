@@ -20,7 +20,7 @@
           </el-form-item>
         </el-form>
         <div class="absolute right-4 top-1/2 -translate-y-1/2">
-          <div class="w-24 h-24  overflow-hidden  relative rounded-full flex justify-center items-center mask">
+          <div class="w-24 h-24  overflow-hidden  relative rounded-full flex justify-center items-center bg-gray-400 mask">
             <img :src="currentUserAvatar"  alt="" class="min-w-full min-h-full absolute top-0 bottom-0">
             <div class="w-full h-full absolute opacity-0 plus flex justify-center items-center"  @click="onClick">
               <svg-icon  icon="plus" color="#fff" class=" text-center text-2xl "></svg-icon>
